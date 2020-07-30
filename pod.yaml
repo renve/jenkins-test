@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: pod
+metadata:
+  name: ren-nginx
+  labels:
+    app: ren-nginx
+spec:
+  containers:
+    - name: website
+      
