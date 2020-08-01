@@ -1,4 +1,4 @@
-currentBuild.displayName = 'rene-container-#'+'current.Build.number-'+'timeInMillis'
+currentBuild.displayName = "rene-container-#"+currentBuild.number"-"+timeInMillis
 pipeline {
     agent any
 
