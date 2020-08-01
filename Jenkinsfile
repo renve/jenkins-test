@@ -1,8 +1,5 @@
+currentBuild.displayName = "rene-container-#"+currentBuild.number+"-"+currentBuild.durationString
 pipeline {
-    environment {
-        currentBuild.displayName = "rene-container-#"+currentBuild.number+"-"+currentBuild.timeInMillis
-
-    }
     agent any
 
     stages {
