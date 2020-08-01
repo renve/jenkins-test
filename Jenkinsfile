@@ -1,3 +1,4 @@
+currentBuild.displayName = 'rene-container-#'+'current.Build.number'
 pipeline {
     agent any
 
