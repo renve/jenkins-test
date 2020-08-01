@@ -1,5 +1,5 @@
 pipeline {
-    env {
+    environment {
         currentBuild.displayName = "rene-container-#"+currentBuild.number+"-"+currentBuild.timeInMillis
 
     }
