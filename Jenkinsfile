@@ -1,7 +1,9 @@
 currentBuild.displayName = "rene-container-#"+currentBuild.number+"-"+currentBuild.durationString
 pipeline {
     agent any
-
+    environment {
+        version = BUILD_NUMBER
+    }
     stages {
         stage ('clone repo'){
             steps {
@@ -9,5 +11,10 @@ pipeline {
             sh 'ls'
             }
         }
+        stage ('build container') {
+            steps {
+                sh "docker build . -t renveg2010/apache:${version}"
+            }
+        }    
     }
 }
