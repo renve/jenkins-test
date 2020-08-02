@@ -2,7 +2,7 @@ currentBuild.displayName = "rene-container-#"+currentBuild.number+"-"+currentBui
 pipeline {
     agent any
     environment {
-        version = BUILD_NUMBER
+        version = 'BUILD_NUMBER'
     }
     stages {
         stage ('clone repo'){
