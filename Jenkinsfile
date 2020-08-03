@@ -3,6 +3,7 @@ pipeline {
     agent any
     environment {
         version = 'BUILD_NUMBER'
+        kmaster ='ssh -o StrictHostKeyChecking=no -l root kmaster'
     }
     stages {
         stage ('clone repo'){
@@ -15,7 +16,8 @@ pipeline {
             steps {
                 sshagent(['e29d4630-587f-4f5c-bcee-fcb592ea9a1c']) {
                     sh """
-                    ssh -o StrictHostKeyChecking=no -l root kmaster uname -a
+
+                    ${kmaster} docker info 
                     """
                 }
             }
