@@ -4,8 +4,8 @@ pipeline {
     environment {
         ssh_kmaster ='ssh -o StrictHostKeyChecking=no -l root kmaster'
         image = 'renveg2010/apache'
-        username = credentials('docker-username')
-        password = credentials('docker-password')
+        docker_username = credentials('docker-username')
+        docker_password = credentials('docker-password')
     }
     stages {
         stage ('clone repo'){
@@ -26,11 +26,9 @@ pipeline {
                     ${ssh_kmaster} ls /tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} pwd
                     ${ssh_kmaster} cat Dockerfile
-                    ${ssh_kmaster} docker build -t renveg2010/apache:${BUILD_NUMBER} /tmp/docker-${BUILD_NUMBER}
+                    // ${ssh_kmaster} docker build -t renveg2010/apache:${BUILD_NUMBER} /tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} docker images | grep ${image}
-                        withCredentials([usernamePassword(credentialsId: 'renveg2010-docker', passwordVariable: 'docker-pwd', usernameVariable: 'docker-user')]) {
-                            ${ssh_kmaster} docker login -u $username -p $password
-                        }
+                    ${ssh_kmaster} docker login -u $docker_username -p $docker_password
                     
                     """
                 
