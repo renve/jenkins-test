@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         ssh_kmaster ='ssh -o StrictHostKeyChecking=no -l root kmaster'
-        image = 'renveg2010'
+        image = 'renveg2010/apache'
         username = credentials('docker-username')
         password = credentials('docker-password')
     }
