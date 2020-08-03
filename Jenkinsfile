@@ -21,7 +21,7 @@ pipeline {
                     ${ssh_kmaster} rm -rf /tmp/docker-${version}
                     ${ssh_kmaster} mkdir /tmp/docker-${version}
                     
-                    ${ssh_kmaster} docker build /tmp/docker-${version}
+                    
                     """
                 }
             }
