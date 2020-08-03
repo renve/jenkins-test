@@ -26,7 +26,7 @@ pipeline {
                     ${ssh_kmaster} ls /tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} pwd
                     ${ssh_kmaster} cat Dockerfile
-                    // ${ssh_kmaster} docker build -t renveg2010/apache:${BUILD_NUMBER} /tmp/docker-${BUILD_NUMBER}
+                    ${ssh_kmaster} docker build -t renveg2010/apache:${BUILD_NUMBER} /tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} docker images | grep ${image}
                     ${ssh_kmaster} docker login -u $docker_username -p $docker_password
                     
