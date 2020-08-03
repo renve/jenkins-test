@@ -23,6 +23,8 @@ pipeline {
                     ${ssh_kmaster} mkdir /tmp/docker-${BUILD_NUMBER}
                     scp -o StrictHostKeyChecking=no Dockerfile root@kmaster:/tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} ls /tmp/docker-${BUILD_NUMBER}
+                    ${ssh_kmaster} pwd
+                    ${ssh_kmaster} cat Dockerfile
                     """
                 }
             }
