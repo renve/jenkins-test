@@ -2,16 +2,13 @@ currentBuild.displayName = "rene-container-#"+currentBuild.number+"-"+currentBui
 pipeline {
     agent any
     environment {
-        
         ssh_kmaster ='ssh -o StrictHostKeyChecking=no -l root kmaster'
-        scp_kmaster ='scp -o StrictHostKeyChecking=no -l root kmaster'
     }
     stages {
         stage ('clone repo'){
             steps {
             sh 'git clone https://github.com/renve/jenkins-test.git'
             sh 'ls'
-            sh 'pwd'
             }
         }
         stage ('build container') {
@@ -21,10 +18,11 @@ pipeline {
                     
                     ${ssh_kmaster} rm -rf /tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} mkdir /tmp/docker-${BUILD_NUMBER}
-                    scp -o StrictHostKeyChecking=no Dockerfile root@kmaster:/tmp/docker-${BUILD_NUMBER}
+                    scp -o StrictHostKeyChecking=no Dockerfile index.html root@kmaster:/tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} ls /tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} pwd
                     ${ssh_kmaster} cat Dockerfile
+                
                     """
                 }
             }
