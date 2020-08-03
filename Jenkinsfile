@@ -3,7 +3,8 @@ pipeline {
     agent any
     environment {
         version = 'BUILD_NUMBER'
-        kmaster ='ssh -o StrictHostKeyChecking=no -l root kmaster'
+        ssh_kmaster ='ssh -o StrictHostKeyChecking=no -l root kmaster'
+        scp_kmaster ='scp -o StrictHostKeyChecking=no -l root kmaster'
     }
     stages {
         stage ('clone repo'){
@@ -16,8 +17,9 @@ pipeline {
             steps {
                 sshagent(['e29d4630-587f-4f5c-bcee-fcb592ea9a1c']) {
                     sh """
-
-                    ${kmaster} docker info 
+                    ${ssh_kmaster} mkdir /tmp/docker-${version}
+                    ${scp_kmaster} .Dockerfile /tmp/docker-${version}
+                    ${ssh_kmaster} docker build /tmp/docker-${version}
                     """
                 }
             }
