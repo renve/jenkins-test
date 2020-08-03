@@ -30,7 +30,7 @@ pipeline {
                     ${ssh_kmaster} docker images | grep ${image}
                     ${ssh_kmaster} docker login -u $docker_username -p $docker_password
                     ${ssh_kmaster} rm -rf /tmp/docker*
-                    ${ssh_kmaster} docker rm -rf $(docker images | grep ${image}:*)
+                    ${ssh_kmaster} docker rm -rf '$(docker images | grep ${image}:*)'
                     """
                 
                 }
