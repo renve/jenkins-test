@@ -3,6 +3,7 @@ pipeline {
     agent any
     environment {
         ssh_kmaster ='ssh -o StrictHostKeyChecking=no -l root kmaster'
+        image = 'renveg2010'
     }
     stages {
         stage ('clone repo'){
@@ -13,6 +14,7 @@ pipeline {
         }
         stage ('build container') {
             steps {
+                withCredentials([usernamePassword(credentialsId: 'renveg2010-docker', passwordVariable: 'docker-pwd', usernameVariable: 'docker-user')]) {
                 sshagent(['e29d4630-587f-4f5c-bcee-fcb592ea9a1c']) {
                     sh """
                     
@@ -23,9 +25,13 @@ pipeline {
                     ${ssh_kmaster} pwd
                     ${ssh_kmaster} cat Dockerfile
                     ${ssh_kmaster} docker build -t renveg2010/apache:${BUILD_NUMBER} /tmp/docker-${BUILD_NUMBER}
-                    ${ssh_kmaster} docker images | grep renveg2010
+                    ${ssh_kmaster} docker images | grep ${image}
+                    ${ssh_kmaster} docker login -u ${docker-user} -p ${docker-pwd}
+                    ${ssh_kmaster} docker push ${image}:${BUILD_NUMBER}
                     """
                 }
+}
+                
             }
 
         }    
