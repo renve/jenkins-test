@@ -21,7 +21,7 @@ pipeline {
                     
                     ${ssh_kmaster} rm -rf /tmp/docker-${version}
                     ${ssh_kmaster} mkdir /tmp/docker-${version}
-                    scp -o StrictHostKeyChecking=no Dockerfile kmaster:/tmp/docker-${version}
+                    scp -o StrictHostKeyChecking=no Dockerfile root@kmaster:/tmp/docker-${version}
                     ${ssh_kmaster} ls /tmp/docker
                     """
                 }
