@@ -29,7 +29,7 @@ pipeline {
                     ${ssh_kmaster} docker build -t renveg2010/apache:${BUILD_NUMBER} /tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} docker images | grep ${image}
                     ${ssh_kmaster} docker login -u $docker_username -p $docker_password
-                    ${ssh_kmaster} rm -rf /tmp/docker/
+                    ${ssh_kmaster} rm -rf /tmp/docker*
                     ${ssh_kmaster} docker image rm -f "\${docker images | grep \${image}}"
                     """
                 
