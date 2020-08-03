@@ -22,7 +22,7 @@ pipeline {
                     ${ssh_kmaster} ls /tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} pwd
                     ${ssh_kmaster} cat Dockerfile
-                
+                    ${ssh_kmaster} docker build /tmp/docker-${BUILD_NUMBER}
                     """
                 }
             }
