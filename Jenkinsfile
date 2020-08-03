@@ -2,7 +2,7 @@ currentBuild.displayName = "rene-container-#"+currentBuild.number+"-"+currentBui
 pipeline {
     agent any
     environment {
-        version = 'BUILD_NUMBER'
+        version = 'env.BUILD_NUMBER'
         ssh_kmaster ='ssh -o StrictHostKeyChecking=no -l root kmaster'
         scp_kmaster ='scp -o StrictHostKeyChecking=no -l root kmaster'
     }
