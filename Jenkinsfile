@@ -29,9 +29,9 @@ pipeline {
                     ${ssh_kmaster} docker build -t renveg2010/apache:${BUILD_NUMBER} /tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} docker images | grep ${image}
                         withCredentials([usernamePassword(credentialsId: 'renveg2010-docker', passwordVariable: 'docker-pwd', usernameVariable: 'docker-user')]) {
-                        ${ssh_kmaster} docker login -u $username -p $password
+                            ${ssh_kmaster} docker login -u $username -p $password
                         }
-                    ${ssh_kmaster} docker push ${image}:${BUILD_NUMBER}
+                    
                     """
                 
                 }
