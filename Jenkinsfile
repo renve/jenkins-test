@@ -12,9 +12,13 @@ pipeline {
             }
         }
         stage ('build container') {
-            steps {
-                sh "docker build . -t renveg2010/apache:${version}"
-            }
+            sshagent(['e29d4630-587f-4f5c-bcee-fcb592ea9a1c']) {
+            sh
+                '''
+                    sh 'ssh -o StrictHostKeyChecking=no -l root kmaster uname -a'
+            
+                '''
+}
         }    
     }
 }
