@@ -11,6 +11,7 @@ pipeline {
             steps {
             sh 'git clone https://github.com/renve/jenkins-test.git'
             sh 'ls'
+            sh 'pwd'
             }
         }
         stage ('build container') {
@@ -19,7 +20,7 @@ pipeline {
                     sh """
                     ${ssh_kmaster} rm -rf /tmp/docker-${version}
                     ${ssh_kmaster} mkdir /tmp/docker-${version}
-                    ${scp_kmaster} .Dockerfile kmaster:/tmp/docker-${version}
+                    
                     ${ssh_kmaster} docker build /tmp/docker-${version}
                     """
                 }
