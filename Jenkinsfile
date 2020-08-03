@@ -16,7 +16,7 @@ pipeline {
         }
         stage ('build container') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'renveg2010-docker', passwordVariable: 'docker-pwd', usernameVariable: 'docker-user')]) {
+                
                 sshagent(['e29d4630-587f-4f5c-bcee-fcb592ea9a1c']) {
                     sh """
                     
@@ -28,11 +28,13 @@ pipeline {
                     ${ssh_kmaster} cat Dockerfile
                     ${ssh_kmaster} docker build -t renveg2010/apache:${BUILD_NUMBER} /tmp/docker-${BUILD_NUMBER}
                     ${ssh_kmaster} docker images | grep ${image}
+                    withCredentials([usernamePassword(credentialsId: 'renveg2010-docker', passwordVariable: 'docker-pwd', usernameVariable: 'docker-user')]) {
                     ${ssh_kmaster} docker login -u $username -p $password
+                    }
                     ${ssh_kmaster} docker push ${image}:${BUILD_NUMBER}
                     """
+                
                 }
-}
                 
             }
 
