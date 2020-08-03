@@ -18,10 +18,10 @@ pipeline {
             steps {
                 sshagent(['e29d4630-587f-4f5c-bcee-fcb592ea9a1c']) {
                     sh """
-                     pwd
+                    
                     ${ssh_kmaster} rm -rf /tmp/docker-${version}
                     ${ssh_kmaster} mkdir /tmp/docker-${version}
-                   
+                    scp -o StrictHostKeyChecking=no Dockerfile kmaster:/tmp/docker-${version}
                     ${ssh_kmaster} ls /tmp/docker
                     """
                 }
