@@ -20,8 +20,8 @@ pipeline {
                     sh """
                     ${ssh_kmaster} rm -rf /tmp/docker-${version}
                     ${ssh_kmaster} mkdir /tmp/docker-${version}
-                    
-                    
+                    scp -o StrictHostKeyChecking=no -l root kmaster jenkins-test/Dockerfile /tmp/docker-${version}
+                    ${ssh_kmaster} ls /tmp/docker
                     """
                 }
             }
