@@ -1,9 +1,19 @@
-FROM nginx:1.19.1
+FROM alpine
 
-LABEL maintainer "renve"
+LABEL maintainer "rene v"
 
-RUN apt update && apt upgrade -y 2> /dev/null
+ENV DOC_ROOT /var/www/mysite-dev
 
-COPY index.html /usr/share/nginx/html
+ARG JQUERY_VERSION=3.5.1
+ENV JQUERY_VERSION ${JQUERY_VERSION}
 
+RUN apk update \
+    && apk upgrade \
+    && apk add \
+    nginx \
+    php7 
+
+COPY index.html ${DOC_ROOT}
+
+EXPOSE 80
 
