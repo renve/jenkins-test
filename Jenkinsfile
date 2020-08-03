@@ -17,6 +17,7 @@ pipeline {
             steps {
                 sshagent(['e29d4630-587f-4f5c-bcee-fcb592ea9a1c']) {
                     sh """
+                    ${ssh_kmaster} rm /tmp/docker-${version}
                     ${ssh_kmaster} mkdir /tmp/docker-${version}
                     ${scp_kmaster} .Dockerfile kmaster:/tmp/docker-${version}
                     ${ssh_kmaster} docker build /tmp/docker-${version}
